@@ -33,7 +33,7 @@ namespace ReactiveXTwitter
             /*
              * Descomentar para usar fake tweets (para testeo sin conexión a internet)
              */
-            _isFake = true;
+            //_isFake = true;
 
             if (!_isFake)
                 Auth.SetUserCredentials(_consumerKey, _consumerSecret, _token, _tokenSecret);
