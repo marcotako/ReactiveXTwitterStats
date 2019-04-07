@@ -39,20 +39,20 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.txtTweetsHW_BRXMF = new System.Windows.Forms.TextBox();
             this.txtAvgTimeBetweenTweets = new System.Windows.Forms.TextBox();
-            this.txtTotalDNM_BRMFPerSeconds = new System.Windows.Forms.TextBox();
+            this.txtTotalHW_BRMFPerSeconds = new System.Windows.Forms.TextBox();
             this.txtTweetsBRXMF = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtTweetsDNM = new System.Windows.Forms.TextBox();
+            this.txtTweetsHW = new System.Windows.Forms.TextBox();
             this.txtTotalTweets = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtTweetsDNM_BRXMF = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,7 +77,7 @@
             this.txtTweets.Multiline = true;
             this.txtTweets.Name = "txtTweets";
             this.txtTweets.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTweets.Size = new System.Drawing.Size(468, 269);
+            this.txtTweets.Size = new System.Drawing.Size(468, 268);
             this.txtTweets.TabIndex = 0;
             // 
             // label1
@@ -126,16 +126,16 @@
             this.splitContainer1.Panel2.Controls.Add(this.label8);
             this.splitContainer1.Panel2.Controls.Add(this.label7);
             this.splitContainer1.Panel2.Controls.Add(this.label6);
-            this.splitContainer1.Panel2.Controls.Add(this.txtTweetsDNM_BRXMF);
+            this.splitContainer1.Panel2.Controls.Add(this.txtTweetsHW_BRXMF);
             this.splitContainer1.Panel2.Controls.Add(this.txtAvgTimeBetweenTweets);
-            this.splitContainer1.Panel2.Controls.Add(this.txtTotalDNM_BRMFPerSeconds);
+            this.splitContainer1.Panel2.Controls.Add(this.txtTotalHW_BRMFPerSeconds);
             this.splitContainer1.Panel2.Controls.Add(this.txtTweetsBRXMF);
             this.splitContainer1.Panel2.Controls.Add(this.label5);
-            this.splitContainer1.Panel2.Controls.Add(this.txtTweetsDNM);
+            this.splitContainer1.Panel2.Controls.Add(this.txtTweetsHW);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.txtTotalTweets);
             this.splitContainer1.Panel2.Controls.Add(this.txtTPS);
-            this.splitContainer1.Size = new System.Drawing.Size(993, 445);
+            this.splitContainer1.Size = new System.Drawing.Size(993, 444);
             this.splitContainer1.SplitterDistance = 483;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -155,8 +155,8 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.txtUsers);
             this.splitContainer3.Panel2.Controls.Add(this.label4);
-            this.splitContainer3.Size = new System.Drawing.Size(483, 445);
-            this.splitContainer3.SplitterDistance = 301;
+            this.splitContainer3.Size = new System.Drawing.Size(483, 444);
+            this.splitContainer3.SplitterDistance = 300;
             this.splitContainer3.TabIndex = 2;
             // 
             // txtUsers
@@ -185,7 +185,7 @@
             // 
             this.btnStop.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(256, 410);
+            this.btnStop.Location = new System.Drawing.Point(256, 409);
             this.btnStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(67, 31);
@@ -197,7 +197,7 @@
             // btnStart
             // 
             this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnStart.Location = new System.Drawing.Point(184, 410);
+            this.btnStart.Location = new System.Drawing.Point(184, 409);
             this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(67, 31);
@@ -215,14 +215,23 @@
             this.label9.TabIndex = 2;
             this.label9.Text = "Tiempo medio entre tweets:";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(2, 287);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(167, 17);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Total  HW-BRMF Tweets:";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(3, 236);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(274, 17);
+            this.label8.Size = new System.Drawing.Size(266, 17);
             this.label8.TabIndex = 2;
-            this.label8.Text = "Num. veces DNM-BRMF Tweets/Segundo:";
+            this.label8.Text = "Num. veces HW-BRMF Tweets/Segundo:";
             // 
             // label7
             // 
@@ -238,9 +247,18 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(3, 134);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(210, 17);
+            this.label6.Size = new System.Drawing.Size(184, 17);
             this.label6.TabIndex = 2;
-            this.label6.Text = "Tweets con DotNetMalaga2018:";
+            this.label6.Text = "Tweets con HackersWeek6:";
+            // 
+            // txtTweetsHW_BRXMF
+            // 
+            this.txtTweetsHW_BRXMF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTweetsHW_BRXMF.Location = new System.Drawing.Point(290, 284);
+            this.txtTweetsHW_BRXMF.Name = "txtTweetsHW_BRXMF";
+            this.txtTweetsHW_BRXMF.Size = new System.Drawing.Size(204, 22);
+            this.txtTweetsHW_BRXMF.TabIndex = 3;
             // 
             // txtAvgTimeBetweenTweets
             // 
@@ -251,14 +269,14 @@
             this.txtAvgTimeBetweenTweets.Size = new System.Drawing.Size(204, 22);
             this.txtAvgTimeBetweenTweets.TabIndex = 3;
             // 
-            // txtTotalDNM_BRMFPerSeconds
+            // txtTotalHW_BRMFPerSeconds
             // 
-            this.txtTotalDNM_BRMFPerSeconds.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtTotalHW_BRMFPerSeconds.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotalDNM_BRMFPerSeconds.Location = new System.Drawing.Point(290, 233);
-            this.txtTotalDNM_BRMFPerSeconds.Name = "txtTotalDNM_BRMFPerSeconds";
-            this.txtTotalDNM_BRMFPerSeconds.Size = new System.Drawing.Size(204, 22);
-            this.txtTotalDNM_BRMFPerSeconds.TabIndex = 3;
+            this.txtTotalHW_BRMFPerSeconds.Location = new System.Drawing.Point(290, 233);
+            this.txtTotalHW_BRMFPerSeconds.Name = "txtTotalHW_BRMFPerSeconds";
+            this.txtTotalHW_BRMFPerSeconds.Size = new System.Drawing.Size(204, 22);
+            this.txtTotalHW_BRMFPerSeconds.TabIndex = 3;
             // 
             // txtTweetsBRXMF
             // 
@@ -278,14 +296,14 @@
             this.label5.TabIndex = 2;
             this.label5.Text = "Total Tweets:";
             // 
-            // txtTweetsDNM
+            // txtTweetsHW
             // 
-            this.txtTweetsDNM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtTweetsHW.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTweetsDNM.Location = new System.Drawing.Point(290, 131);
-            this.txtTweetsDNM.Name = "txtTweetsDNM";
-            this.txtTweetsDNM.Size = new System.Drawing.Size(204, 22);
-            this.txtTweetsDNM.TabIndex = 3;
+            this.txtTweetsHW.Location = new System.Drawing.Point(290, 131);
+            this.txtTweetsHW.Name = "txtTweetsHW";
+            this.txtTweetsHW.Size = new System.Drawing.Size(204, 22);
+            this.txtTweetsHW.TabIndex = 3;
             // 
             // txtTotalTweets
             // 
@@ -312,7 +330,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.txtLog);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Size = new System.Drawing.Size(993, 651);
-            this.splitContainer2.SplitterDistance = 445;
+            this.splitContainer2.SplitterDistance = 444;
             this.splitContainer2.TabIndex = 5;
             // 
             // txtLog
@@ -325,7 +343,7 @@
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLog.Size = new System.Drawing.Size(969, 165);
+            this.txtLog.Size = new System.Drawing.Size(969, 166);
             this.txtLog.TabIndex = 1;
             // 
             // label3
@@ -336,24 +354,6 @@
             this.label3.Size = new System.Drawing.Size(36, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Log:";
-            // 
-            // txtTweetsDNM_BRXMF
-            // 
-            this.txtTweetsDNM_BRXMF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTweetsDNM_BRXMF.Location = new System.Drawing.Point(290, 284);
-            this.txtTweetsDNM_BRXMF.Name = "txtTweetsDNM_BRXMF";
-            this.txtTweetsDNM_BRXMF.Size = new System.Drawing.Size(204, 22);
-            this.txtTweetsDNM_BRXMF.TabIndex = 3;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(2, 287);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(175, 17);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Total  DNM-BRMF Tweets:";
             // 
             // Form1
             // 
@@ -406,13 +406,13 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtTweetsBRXMF;
-        private System.Windows.Forms.TextBox txtTweetsDNM;
+        private System.Windows.Forms.TextBox txtTweetsHW;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtTotalDNM_BRMFPerSeconds;
+        private System.Windows.Forms.TextBox txtTotalHW_BRMFPerSeconds;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtAvgTimeBetweenTweets;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtTweetsDNM_BRXMF;
+        private System.Windows.Forms.TextBox txtTweetsHW_BRXMF;
     }
 }
 

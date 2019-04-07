@@ -14,13 +14,13 @@ namespace ReactiveXTwitter
         private static bool _isFake = false;
 
         // Obtain these values by creating a Twitter app at http://dev.twitter.com/
-        private static string _consumerKey = "Drx3YJ2iikbBp6tPZ8e1r17R9";
-        private static string _consumerSecret = "6E5BufINo8ECV6kyttNikxqaYy9DnYSbk8r98chA6qd3qjMuLx";
-        private static string _token = "1053987166420959232-SoiWGIbc5UKHOhzjg1sp5y1X0l0hE0";
-        private static string _tokenSecret = "FeZffklrrRC6q3NYlv42Rb8UKJPUrLipn8NOW3obUp2xD";
+        private static string _consumerKey = "tD7XndcbCvt6J1vG9rxVY9RFp";
+        private static string _consumerSecret = "3YrSVLDVKcuLjoRUNV7dmrywmGk6iZbs2q44MbCfgbX0J7ubXu";
+        private static string _token = "1114567730559164417-BdHmaJYUd6wp3O3bxJ9fJe3hdHRyDK";
+        private static string _tokenSecret = "MLHBw8SWKjlNLIYw113n1DP75dg0YhFLyY1EstmZlkeHB";
 
         private FilteredStream _beReactiveXMyFriendfilteredStream;
-        private FilteredStream _dotnetmalagaFilteredStream;
+        private FilteredStream _hackersWeekFilteredStream;
         private CancellationTokenSource _cancellationTokenSource;
 
         public Form1()
@@ -33,7 +33,7 @@ namespace ReactiveXTwitter
             /*
              * Descomentar para usar fake tweets (para testeo sin conexión a internet)
              */
-            //_isFake = true;
+            _isFake = true;
 
             if (!_isFake)
                 Auth.SetUserCredentials(_consumerKey, _consumerSecret, _token, _tokenSecret);
@@ -45,17 +45,17 @@ namespace ReactiveXTwitter
             var beReactiveXMyFriendTweets = _beReactiveXMyFriendfilteredStream.GetTweets();
 
             /*
-             * Creamos el flujo de tweets para "DotNetMalaga" y devolvemos un observable de tweets
+             * Creamos el flujo de tweets para "HackersWeek6" y devolvemos un observable de tweets
              */
-            _dotnetmalagaFilteredStream = new FilteredStream("DotNetMalaga2018", _isFake);
-            var dotNetMalagaTweets = _dotnetmalagaFilteredStream.GetTweets();
+            _hackersWeekFilteredStream = new FilteredStream("HackersWeek6", _isFake);
+            var hackersWeekTweets = _hackersWeekFilteredStream.GetTweets();
 
             /*
              * Mezclamos los dos flujos en uno quitando los tweets repetidos ya que un mismo tweet podría 
              * entrar por los dos flujos si contiene las dos palabras clave
              */
             var allTweets = beReactiveXMyFriendTweets
-                .Merge(dotNetMalagaTweets)
+                .Merge(hackersWeekTweets)
                 //.Log(this.txtLog, "Merge")
                 .Distinct(t => t.Id);
 
@@ -100,15 +100,15 @@ namespace ReactiveXTwitter
                 .SubscribeToTextControl(this.txtTotalTweets, x => x.ToString(), _cancellationTokenSource.Token);
 
             /*
-             * Calcula el número de total de tweets con DotNetMalaga
+             * Calcula el número de total de tweets con "HackersWeek6"
              */
-            dotNetMalagaTweets
+            hackersWeekTweets
                 .Scan(0, (a, t) => a + 1)
-                .Log(this.txtLog, "Total Tweets DotNetMalaga")
-                .SubscribeToTextControl(this.txtTweetsDNM, x => x.ToString(), _cancellationTokenSource.Token);
+                .Log(this.txtLog, "Total Tweets HackersWeek6")
+                .SubscribeToTextControl(this.txtTweetsHW, x => x.ToString(), _cancellationTokenSource.Token);
 
             /*
-             * Calcula el número de total de tweets con BeReactiveXMyFriend
+             * Calcula el número de total de tweets con "BeReactiveXMyFriend"
              */
             beReactiveXMyFriendTweets
                 .Scan(0, (a, t) => a + 1)
@@ -116,31 +116,31 @@ namespace ReactiveXTwitter
                 .SubscribeToTextControl(this.txtTweetsBRXMF, x => x.ToString(), _cancellationTokenSource.Token);
 
             /*
-             * Calcula el número de veces en el que llegan dos tweets, uno con BeReactiveXMyFriend y el otro con DotNetMalaga
+             * Calcula el número de veces en el que llegan dos tweets, uno con BeReactiveXMyFriend y el otro con HackersWeek6
              * cada segundo
              */
             var timeFrame = Observable.Interval(TimeSpan.FromSeconds(1));
-            dotNetMalagaTweets
+            hackersWeekTweets
                 .Join(beReactiveXMyFriendTweets,
                     dnmt => timeFrame,
                     brxmft => timeFrame,        
                     (dnmt, brxmft) => new { DotNetMalagaTweet = dnmt, BeReactiveXMyFriendTweet = brxmft })
                 .Select(x => $"{x.DotNetMalagaTweet.CreatedAt.ToShortTimeString()} - {x.BeReactiveXMyFriendTweet.CreatedAt.ToShortTimeString()}")
-                .Log(this.txtLog, "Total veces DNM-BRMF tweets en el mismo segundo")
+                .Log(this.txtLog, "Total veces HW-BRMF tweets en el mismo segundo")
                 .Scan(0, (a, t) => a + 1)                
-                .SubscribeToTextControl(this.txtTotalDNM_BRMFPerSeconds, x => x.ToString(), _cancellationTokenSource.Token);
+                .SubscribeToTextControl(this.txtTotalHW_BRMFPerSeconds, x => x.ToString(), _cancellationTokenSource.Token);
 
             /*
-             * Calcula el número de tweets con BeReactiveXMyFriend y DotNetMalaga en el mismo tweet
+             * Calcula el número de tweets con BeReactiveXMyFriend y HackersWeek6 en el mismo tweet
              */
-            dotNetMalagaTweets
+            hackersWeekTweets
                 .Where(t => t.Text.ToUpper().Contains("BEREACTIVEXMYFRIEND"))
                 .Merge(beReactiveXMyFriendTweets
-                    .Where(t => t.Text.ToUpper().Contains("DOTNETMALAGA2018")))
+                    .Where(t => t.Text.ToUpper().Contains("HackersWeek6")))
                 .Distinct(t => t.Id) //El mismo tweet entra por los dos flujos
                 .Scan(0, (a, t) => a + 1)
-                .Log(this.txtLog, "Número de tweets con DNM-BRMF")
-                .SubscribeToTextControl(this.txtTweetsDNM_BRXMF, x => x.ToString(), _cancellationTokenSource.Token);
+                .Log(this.txtLog, "Número de tweets con HW-BRMF")
+                .SubscribeToTextControl(this.txtTweetsHW_BRXMF, x => x.ToString(), _cancellationTokenSource.Token);
 
             /*
              * Calcula el tiempo medio entre tweets en segundos
@@ -161,21 +161,21 @@ namespace ReactiveXTwitter
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             _cancellationTokenSource.Cancel();
-            _dotnetmalagaFilteredStream.StopStream();
+            _hackersWeekFilteredStream.StopStream();
             _beReactiveXMyFriendfilteredStream.StopStream();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
             Task.Run(async () => await _beReactiveXMyFriendfilteredStream.StartStreamAsync());
-            Task.Run(async () => await _dotnetmalagaFilteredStream.StartStreamAsync());
+            Task.Run(async () => await _hackersWeekFilteredStream.StartStreamAsync());
             this.btnStart.Enabled = false;
             this.btnStop.Enabled = true;
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            _dotnetmalagaFilteredStream.StopStream();
+            _hackersWeekFilteredStream.StopStream();
             _beReactiveXMyFriendfilteredStream.StopStream();
             this.btnStart.Enabled = true;
             this.btnStop.Enabled = false;
