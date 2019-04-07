@@ -136,7 +136,7 @@ namespace ReactiveXTwitter
             hackersWeekTweets
                 .Where(t => t.Text.ToUpper().Contains("BEREACTIVEXMYFRIEND"))
                 .Merge(beReactiveXMyFriendTweets
-                    .Where(t => t.Text.ToUpper().Contains("HackersWeek6")))
+                    .Where(t => t.Text.ToUpper().Contains("HACKERSWEEK6")))
                 .Distinct(t => t.Id) //El mismo tweet entra por los dos flujos
                 .Scan(0, (a, t) => a + 1)
                 .Log(this.txtLog, "Número de tweets con HW-BRMF")
